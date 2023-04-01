@@ -9,7 +9,6 @@ import {
   AudioLoader,
   AudioAnalyser,
   Audio,
-  OrbitControls,
   Vector3,
   Clock,
   MeshNormalMaterial,
