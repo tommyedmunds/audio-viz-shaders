@@ -14,12 +14,14 @@ import {
   MeshNormalMaterial,
   Mesh,
 } from 'three';
-import { createNoise3D } from 'simplex-noise';
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { createSculpture, createSculptureWithGeometry } from 'shader-park-core';
+import { createSculptureWithGeometry } from 'shader-park-core';
 import { spCode } from './spCode.js';
 
-let ahURL = require('url:./assets/bremix2.wav');
+// let ahURL = require('url:./assets/bremix2.wav');
+let ahURL =
+  'https://raw.githubusercontent.com/tommyedmunds/audio-viz-shaders/master/assets/bremix2.wav';
 
 let scene = new Scene();
 let params = {
