@@ -17,6 +17,7 @@
     "three": "^0.138.3"
   },
   "devDependencies": {
+    "netlify-cli": "^13.2.2",
     "parcel": "^2.3.2"
   }
 }

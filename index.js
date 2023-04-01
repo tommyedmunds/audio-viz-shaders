@@ -20,7 +20,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { createSculpture, createSculptureWithGeometry } from 'shader-park-core';
 import { spCode } from './spCode.js';
 
-let ahURL = require('url:./assets/ah.mp3');
+let ahURL = require('url:./assets/bremix2.wav');
 
 let scene = new Scene();
 let params = {
@@ -29,8 +29,8 @@ let params = {
   morph: 0.0,
 };
 
-let camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 4;
+let camera = new PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 50;
 
 let renderer = new WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -78,87 +78,64 @@ let clicked = false;
 let frameCount = 0;
 document.addEventListener('click', (e) => {
   console.log(e.clientX, e.clientY, screen.height);
-  if (e.clientX >= screen.height * 0.95)
-    if (!clicked) {
-      sound.play();
-      clicked = true;
-    } else {
-      sound.pause();
-      clicked = false;
-    }
+  // if (e.clientX >= screen.height * 0.95)
+  if (!clicked) {
+    sound.play();
+    clicked = true;
+  } else {
+    sound.pause();
+    clicked = false;
+  }
 });
 
 // shape shit
 
-const geometry2 = new SphereGeometry(3, 4, 6);
+const geometry = new SphereGeometry(35, 35, 35);
+const geo2 = new SphereGeometry(83, 84, 86);
 const material2 = new MeshNormalMaterial({ wireframe: true });
-const sphere2 = new Mesh(geometry2, material2);
+const wrapGeo = new Mesh(geo2, material2);
 
-scene.add(sphere2);
+scene.add(wrapGeo);
 
-console.log('sp2 ', sphere2.geometry);
+// console.log('sp2 ', sphere2.geometry.attributes.position);
 
-let geometry = new SphereGeometry(4, 0.3, 100, 9.6);
-geometry.computeBoundingSphere();
-geometry.center();
+// let geometry = new SphereGeometry(7, 8, 100, 9.6);
+// geometry.computeBoundingSphere();
+// geometry.center();
 
 // Shader Park Setup
-let mesh = createSculpture(spCode, () => ({
+// let mesh = createSculpture(spCode, () => ({
+//   time: params.time,
+//   audio: params.audio,
+//   morph: params.morph,
+// }));
+// scene.add(mesh);
+
+console.log('is this on');
+
+// *** Uncomment to try using a custom geometry. Make sure to comment out likes 26-29 ***.
+
+let mesh = createSculptureWithGeometry(geometry, spCode, () => ({
   time: params.time,
   audio: params.audio,
   morph: params.morph,
 }));
 scene.add(mesh);
 
-console.log('is this on');
-
-// *** Uncomment to try using a custom geometry. Make sure to comment out likes 26-29 ***.
-
-// let mesh = createSculptureWithGeometry(geometry, spCode, () => ({
-//   time: params.time,
-// }));
-// scene.add(mesh);
-
 // mesh.rotation.set(new Vector3(1, 2, Math.PI / 2));
-let countDown = 20;
-let countDown2 = 10;
-
-let morphinTime1 = 20;
-let morphinTime2 = 20;
-console.log(mesh);
+// console.log(mesh);
 let render = () => {
   const freqData = analyser.getAverageFrequency();
   // console.log(freqData);
   requestAnimationFrame(render);
   let timeElapsed = listener._clock.getElapsedTime();
   if (clicked) {
-    // let trueTime = timeElapsed - 1;
-    //makeRoughShape(mesh, freqData);
-    let subtractThis = 0.00024;
-    // chorus ?
-    if (timeElapsed >= 29.0 && timeElapsed <= 33.3) {
-      console.log(params.morph, morphinTime1);
-      params.morph += freqData * 0.00019;
-    } else if (timeElapsed >= 33.3 && timeElapsed <= 39.6665) {
-      // how tf do make better
-      params.morph += freqData * subtractThis;
-      if (subtractThis > 0.0001) {
-        subtractThis -= 0.00001;
-      }
-    } else {
-      params.audio += freqData;
-
-      params.morph = freqData * 0.0001;
-    }
+    params.audio += freqData;
+    params.morph = freqData * 0.00016;
   }
-  //const rescaledFreqAvg = (freqData * 500) / 255;
-  //mesh.rotation.x += 1;
-  //console.log(mesh.rotation);
 
-  //params.time += 0.0001 * freqData;
   params.time += 0.01;
-  //console.log(rescaledFreqAvg);
-  //console.log(params.time);
+
   controls.update();
   renderer.render(scene, camera);
 };
