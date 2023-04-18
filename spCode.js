@@ -40,19 +40,21 @@ export function spCode() {
 
   // blend(0.23);
   // displace(-0.25, 0, 0);
-  mirrorXYZ();
+
   // displace(sin(s.y + time * 0.08), 0, 0);
   displace(0, sin(s.y + n * 0.06), 0);
-  torus(0.07 + n, 0.08 + n);
+  torus(0.07 + n, 0.007 + n);
+
   // displace(0.5, 0, 0);
   // mixGeo(abs(sin(time * audio * 0.0000018)));
   mixGeo(abs(sin(time * audio * 0.000009)));
-
+  mirrorXYZ();
   expand(0.075);
   blend(0.2);
 
-  sphere(0.06 + n);
+  sphere(0.02 + n);
 
+  mirrorY();
   let distro = sphericalDistribution(s, randomIntFromInterval(1, 75));
   // expand(distro.w * 0.5);
 }

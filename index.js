@@ -19,9 +19,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { createSculptureWithGeometry } from 'shader-park-core';
 import { spCode } from './spCode.js';
 
-// let ahURL = require('url:./assets/bremix2.wav');
-let ahURL =
-  'https://raw.githubusercontent.com/tommyedmunds/audio-viz-shaders/master/assets/bremix2.wav';
+let ahURL = require('url:./assets/bremix2.wav');
+// let ahURL =
+//   'https://raw.githubusercontent.com/tommyedmunds/audio-viz-shaders/master/assets/bremix2.wav';
 
 let scene = new Scene();
 let params = {
@@ -90,13 +90,13 @@ document.addEventListener('click', (e) => {
 });
 
 // shape shit
+let shapeDim = 35;
+const geometry = new SphereGeometry(shapeDim, shapeDim, shapeDim);
+// const geo2 = new SphereGeometry(83, 84, 86);
+// const material2 = new MeshNormalMaterial({ wireframe: true });
+// const wrapGeo = new Mesh(geo2, material2);
 
-const geometry = new SphereGeometry(35, 35, 35);
-const geo2 = new SphereGeometry(83, 84, 86);
-const material2 = new MeshNormalMaterial({ wireframe: true });
-const wrapGeo = new Mesh(geo2, material2);
-
-scene.add(wrapGeo);
+// scene.add(wrapGeo);
 
 // console.log('sp2 ', sphere2.geometry.attributes.position);
 
