@@ -19,7 +19,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { createSculptureWithGeometry } from 'shader-park-core';
 import { spCode } from './spCode.js';
 
-let ahURL = require('url:./assets/bremix2.wav');
+let ahURL = require('url:./assets/bremix2232024.wav');
 // let ahURL =
 //   'https://raw.githubusercontent.com/tommyedmunds/audio-viz-shaders/master/assets/bremix2.wav';
 
@@ -111,8 +111,6 @@ const geometry = new SphereGeometry(shapeDim, shapeDim, shapeDim);
 //   morph: params.morph,
 // }));
 // scene.add(mesh);
-
-console.log('is this on');
 
 // *** Uncomment to try using a custom geometry. Make sure to comment out likes 26-29 ***.
 
